@@ -1,13 +1,17 @@
 package com.londonappbrewery.climapm;
 
+import android.app.Activity;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class WeatherController extends AppCompatActivity {
+public class WeatherController extends Activity {
 
     // Constants:
     final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather";
@@ -19,7 +23,7 @@ public class WeatherController extends AppCompatActivity {
     final float MIN_DISTANCE = 1000;
 
     // TODO: Set LOCATION_PROVIDER here:
-
+    String LOCATION_PROVIDER = LocationManager.GPS_PROVIDER;
 
 
 
@@ -29,7 +33,8 @@ public class WeatherController extends AppCompatActivity {
     TextView mTemperatureLabel;
 
     // TODO: Declare a LocationManager and a LocationListener here:
-
+    LocationManager mLocationManager;
+    LocationListener mLocationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +55,13 @@ public class WeatherController extends AppCompatActivity {
 
 
     // TODO: Add onResume() here:
-
-
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d("Clima", "onResume() called");
+        Log.d("Clima", "Getting weather for current location");
+        getWeatherForCurrentLocation();
+    }
 
     // TODO: Add getWeatherForNewCity(String city) here:
 
